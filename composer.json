@@ -1,0 +1,15 @@
+{
+    "require": {
+       "illuminate/database": "*",
+       "jusjambu/router": "dev-master"
+    },
+    "autoload": {
+		"classmap": [
+			"app/controllers",
+			"app/models"
+		],
+		"files": [
+			"app/config/database.php"
+		]
+	}
+}
