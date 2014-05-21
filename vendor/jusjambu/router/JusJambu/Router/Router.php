@@ -1,4 +1,6 @@
-<?php namespace JusJambu\Router;
+<?php 
+
+namespace JusJambu\Router;
 
 /**
 * @name    PHP Router
@@ -91,7 +93,7 @@ class Router
     }
 
     /**
-     * Get the base URL for the current request.
+     * Get the base URL for the current request. Using WordPress Post Permalink
      *
      * @return string
      */
@@ -99,18 +101,11 @@ class Router
     {
         if (!is_null(static::$base))
             return static::$base . $uri;
-        
-        if (isset($_SERVER['HTTP_HOST']))
-        {
-            static::$base = Router::secure() ? 'https' : 'http';
-            static::$base .= '://' . $_SERVER['HTTP_HOST'];
-            static::$base .= str_replace(basename($_SERVER['SCRIPT_NAME']), '', $_SERVER['SCRIPT_NAME']);
-        }
-        else
-        {
-            static::$base = 'http://localhost/';
-        }
-        
+
+        global $post;
+
+        static::$base = get_permalink($post->ID);
+
         return static::$base . $uri;
     }
 
